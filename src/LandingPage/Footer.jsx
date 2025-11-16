@@ -32,7 +32,7 @@ export default function Footer() {
             flexWrap: 'wrap',
             gap: 4,
             mb: 4,
-            px: 3   // padding بسيط داخلي فقط // يمكن حذفه إذا أردت
+            px: 5  // padding بسيط داخلي فقط // يمكن حذفه إذا أردت
           }}
         >
 
@@ -41,7 +41,7 @@ export default function Footer() {
             sx={{ 
               flex: { xs: '1 1 100%', md: '1 1 20%' },
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "flex-start",
               alignItems: "center"
             }}
           >
@@ -78,10 +78,9 @@ export default function Footer() {
                 sx={{
                   display: 'block',
                   color: '#ddd',
-                  fontWeight: 600,
                   textDecoration: 'none',
                   mb: 2,
-                  fontSize: '0.95rem',
+                  fontSize: '0.9rem',
                   '&:hover': { color: '#ef5350' }
                 }}
               >
@@ -103,9 +102,9 @@ export default function Footer() {
                 href="#"
                 sx={{
                   display: 'block',
-                  color: '#aaa',
+                  color: '#ddd',
                   textDecoration: 'none',
-                  mb: 1,
+                  mb: 2,
                   fontSize: '0.9rem',
                   '&:hover': { color: '#ef5350' }
                 }}
@@ -113,7 +112,7 @@ export default function Footer() {
                 {link}
               </Link>
             ))}
-          </Box>
+          </Box>  
 
           {/* NEWSLETTER COLUMN */}
           <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 30%' } }}>
@@ -123,20 +122,27 @@ export default function Footer() {
 
             <Typography 
               variant="body2"
-              sx={{ color: '#aaa', mb: 2, fontSize: '0.85rem', lineHeight: 1.6 }}
+              sx={{ color: '#ddd', mb: 2, fontSize: '0.95rem', lineHeight: 1.6,fontWeight:500 }}
             >
-              Stay up to date with our latest news, and never exclusive deals, and more.
+              Stay up to date with our latest news,
+              <br />
+              recive exclusive deals,and more.
             </Typography>
 
             <TextField
-              placeholder="Email Address"
+              placeholder="Enter your email address"
               variant="outlined"
               size="small"
               fullWidth
               sx={{
                 mb: 2,
+                width: '300px',
                 backgroundColor: 'white',
                 borderRadius: '5px',
+                '& input': {
+                  fontSize: '0.85rem',    // ← تصغير حجم الخط داخل الحقل
+                },
+
                 '& .MuiOutlinedInput-root fieldset': { borderColor: 'transparent' }
               }}
             />
@@ -145,8 +151,9 @@ export default function Footer() {
               variant="contained"
               fullWidth
               sx={{
-                backgroundColor: '#ef5350',
+                backgroundColor: '#EC2323',
                 color: 'white',
+                width: '200px',
                 textTransform: 'none',
                 fontWeight: 600,
                 py: 1,
@@ -161,35 +168,40 @@ export default function Footer() {
         {/* END MAIN FLEX WRAPPER */}
 
         {/* FOOTER BOTTOM */}
-        <Box 
-          sx={{
-            mt: 4,
-            pt: 3,
-            px: 3,
-            borderTop: '1px solid #444',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap'
-          }}
-        >
-          <Typography variant="body2" sx={{ color: '#aaa', fontSize: '0.85rem' }}>
-            Copyright © 2024 | termbi
-          </Typography>
+          <Box
+            sx={{
+              mt: 'auto', 
+              py: 1,
+              px: 6,
+              backgroundColor: '#111',       // الخلفية الداكنة مثل الصورة
+              borderTop: '1px solid #333',   // الخط الرفيع بالأعلى
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <Typography
+              variant="body2"
+              sx={{ color: '#aaa', fontSize: '0.85rem' }}
+            >
+              Copyright © 2024 | termbi
+            </Typography>
 
-          <Box>
-            <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
-              <FacebookIcon />
-            </IconButton>
+            <Box sx={{ display: 'flex', gap: 1 }}>
+              <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
+                <FacebookIcon />
+              </IconButton>
 
-            <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
-              <InstagramIcon />
-            </IconButton>
+              <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
+                <InstagramIcon />
+              </IconButton>
 
-            <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
-              <YouTubeIcon />
-            </IconButton>
-          </Box>
+              <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
+                <YouTubeIcon />
+              </IconButton>
+            </Box>
+         
+
         </Box>
 
       </Container>
