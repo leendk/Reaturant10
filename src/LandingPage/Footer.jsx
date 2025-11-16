@@ -14,16 +14,18 @@ export default function Footer() {
       <Container maxWidth="lg">
         <Box sx={{ 
           display: 'flex', 
-          flexWrap: 'wrap',tr
+          flexWrap: 'wrap',
           gap: 4,
           mb: 4
         }}>
           <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 20%' } }}>
             <Typography 
-              variant="h5" 
+              variant="h4" 
               sx={{ 
-                fontWeight: 600,
-                mb: 3
+                fontWeight: 400,
+                mb: 3,
+                fontSize: '1.75rem',
+                letterSpacing: '0.5px'
               }}
             >
               term<span style={{ color: '#ef5350' }}>bi</span>
