@@ -1,7 +1,7 @@
 import { Box, Typography, Container, Link, TextField, Button, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 export default function Footer() {
   const footerLinks = {
@@ -15,28 +15,28 @@ export default function Footer() {
         backgroundColor: '#2d2d2d',
         color: 'white',
         pt: 6,
-        pb: 3,
+        pb: 0,
         width: "100%",
         mx: 0,
         px: 0
       }}
     >
 
-      {/* جعل الكونتينر يأخذ العرض كاملًا */}
+      {/* MAIN CONTENT */}
       <Container maxWidth={false} disableGutters sx={{ mx: 0, px: 0 }}>
 
-        {/* BEGIN MAIN FLEX WRAPPER */}
+        {/* MAIN FLEX ROW */}
         <Box 
           sx={{
             display: 'flex',
             flexWrap: 'wrap',
             gap: 4,
             mb: 4,
-            px: 5  // padding بسيط داخلي فقط // يمكن حذفه إذا أردت
+            px: 5
           }}
         >
 
-          {/* LOGO COLUMN */}
+          {/* LOGO */}
           <Box 
             sx={{ 
               flex: { xs: '1 1 100%', md: '1 1 20%' },
@@ -57,17 +57,14 @@ export default function Footer() {
             />
           </Box>
 
-          {/* FEATURES COLUMN */}
+          {/* FEATURES */}
           <Box
             sx={{
               flex: { xs: '1 1 100%', md: '1 1 20%' },
-              fontFamily: 'SF Pro Display'   // ← يطبق على العنوان والروابط معاً
+              fontFamily: 'SF Pro Display'
             }}
           >
-            <Typography
-              variant="h6"
-              sx={{ fontWeight: 600, mb: 2, fontSize: '1rem' }}
-            >
+            <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: '1rem' }}>
               Features
             </Typography>
 
@@ -89,8 +86,7 @@ export default function Footer() {
             ))}
           </Box>
 
-
-          {/* QUICK LINKS COLUMN */}
+          {/* QUICK LINKS */}
           <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 20%' } }}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: '1rem' }}>
               Quick Link
@@ -112,20 +108,16 @@ export default function Footer() {
                 {link}
               </Link>
             ))}
-          </Box>  
+          </Box>
 
-          {/* NEWSLETTER COLUMN */}
+          {/* NEWSLETTER */}
           <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 30%' } }}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: '1rem' }}>
               Newsletters
             </Typography>
 
-            <Typography 
-              variant="body2"
-              sx={{ color: '#ddd', mb: 2, fontSize: '0.95rem', lineHeight: 1.6,fontWeight:500 }}
-            >
-              Stay up to date with our latest news,
-              <br />
+            <Typography variant="body2" sx={{ color: '#ddd', mb: 2, fontSize: '0.95rem', lineHeight: 1.6, fontWeight: 500 }}>
+              Stay up to date with our latest news,<br />
               recive exclusive deals,and more.
             </Typography>
 
@@ -139,10 +131,7 @@ export default function Footer() {
                 width: '300px',
                 backgroundColor: 'white',
                 borderRadius: '5px',
-                '& input': {
-                  fontSize: '0.85rem',    // ← تصغير حجم الخط داخل الحقل
-                },
-
+                '& input': { fontSize: '0.85rem' },
                 '& .MuiOutlinedInput-root fieldset': { borderColor: 'transparent' }
               }}
             />
@@ -165,46 +154,41 @@ export default function Footer() {
           </Box>
 
         </Box>
-        {/* END MAIN FLEX WRAPPER */}
-
-        {/* FOOTER BOTTOM */}
-          <Box
-            sx={{
-              mt: 'auto', 
-              py: 1,
-              px: 6,
-              backgroundColor: '#111',       // الخلفية الداكنة مثل الصورة
-              borderTop: '1px solid #333',   // الخط الرفيع بالأعلى
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
-          >
-            <Typography
-              variant="body2"
-              sx={{ color: '#aaa', fontSize: '0.85rem' }}
-            >
-              Copyright © 2024 | termbi
-            </Typography>
-
-            <Box sx={{ display: 'flex', gap: 1 }}>
-              <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
-                <FacebookIcon />
-              </IconButton>
-
-              <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
-                <InstagramIcon />
-              </IconButton>
-
-              <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
-                <YouTubeIcon />
-              </IconButton>
-            </Box>
-         
-
-        </Box>
 
       </Container>
+
+      {/* FOOTER BOTTOM — خارج الكونتينر */}
+      <Box
+        sx={{
+          py: -2,
+          px: 6,
+          backgroundColor: '#111',
+          borderTop: '1px solid #333',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          mt: 4,
+        }}
+      >
+        <Typography variant="body2" sx={{ color: '#aaa', fontSize: '0.95rem', fontWeight: 500 }}>
+          Copyright © 2024 | termbi
+        </Typography>
+
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
+            <FacebookIcon />
+          </IconButton>
+
+          <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
+            <InstagramIcon />
+          </IconButton>
+
+          <IconButton sx={{ color: '#aaa', '&:hover': { color: '#ef5350' } }}>
+            <TwitterIcon />
+          </IconButton>
+        </Box>
+      </Box>
+
     </Box>
   );
 }
