@@ -5,6 +5,7 @@ entrypoint = "index.html"
 
 [nix]
 channel = "stable-24_05"
+packages = ["tree"]
 
 [unitTest]
 language = "nodejs"
@@ -29,10 +30,6 @@ externalPort = 3002
 [[ports]]
 localPort = 5173
 externalPort = 80
-
-[[ports]]
-localPort = 39087
-externalPort = 3000
 
 [agent]
 expertMode = true
