@@ -4,23 +4,24 @@ import {
   Container,
   Card,
   CardContent,
-  Button,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText
+  Button
 } from "@mui/material";
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import { Check } from "@mui/icons-material";
+import { useState } from "react";
 
 export default function PricingPackages() {
+  const [selected, setSelected] = useState(null);
+
+  const headerDefault = "#fce4ec";
+  const borderDefault = "#f48fb1";
+  const activeColor = "#ef5350";
+
   const packages = [
     {
       name: "Free",
       price: "$0",
       period: "/month",
-      features: ["Services", "Services", "Services", "Services", "Services"],
-      headerBg: "#ffe6e6",
-      highlight: false,
+      features: ["Services", "Services", "Services", "Services", "Services"]
     },
     {
       name: "Premium",
@@ -33,28 +34,25 @@ export default function PricingPackages() {
         "Services",
         "Services",
         "Services"
-      ],
-      headerBg: "#ef5350",
-      highlight: true,
+      ]
     },
     {
       name: "Enterprise",
       price: "$75",
       period: "/month",
-      features: ["Services", "Services", "Services", "Services", "Services"],
-      headerBg: "#ffe6e6",
-      highlight: false,
-    },
+      features: ["Services", "Services", "Services", "Services", "Services"]
+    }
   ];
 
   return (
-    <Box sx={{ py: 10, backgroundColor: "#fff" }}>
+    <Box sx={{ py: 8, backgroundColor: "#fff" }}>
       <Container maxWidth="lg">
+
         <Typography
           variant="h4"
           align="center"
           sx={{
-            mb: 6,
+            mb: 5,
             color: "#333",
             fontWeight: 600
           }}
@@ -66,136 +64,166 @@ export default function PricingPackages() {
           sx={{
             display: "flex",
             justifyContent: "center",
-            gap: 10,
+            gap: 13,
             flexWrap: "wrap"
           }}
         >
-          {packages.map((pkg, index) => (
-            <Card
-              key={index}
-              sx={{
-                width: 280,
-                borderRadius: "20px",
-                boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
-                overflow: "visiable",
-                position: "relative",
-                transform: pkg.highlight ? "scale(1.08)" : "scale(1)",
-                transition: "0.3s"
-              }}
-            >
-              {/* ====== HEADER ====== */}
-              <Box
-                sx={{
-                  position: "relative",
-                  height: 140,
-                  mb: 2,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center"
-                }}
-              >
-                {/* الشكل المنحني */}
+          {packages.map((pkg, index) => {
+            const isActive = selected === index;
+
+            return (
+                <Card
+                  key={index}
+                  onClick={() => setSelected(index)}
+                  sx={{
+                    width: 260,
+                    borderRadius: "12px",
+                    minHeight: "auto",
+                    height: "auto !important",
+                    boxShadow: "0 4px 18px rgba(0,0,0,0.08)",
+                    cursor: "pointer",
+                    overflow: "hidden",
+                    transition: "0.3s",
+                    
+                    transform: isActive ? "scale(1.06)" : "scale(1)",
+
+                    outline: "none",         // ⬅️ يمنع اختفاء النص
+                    "&:focus": { outline: "none" }, // ⬅️ يمنع التركيز
+                    "&:active": { outline: "none" }, // ⬅️ يمنع إعادة الرسم وقت الضغط
+                  }}
+                  tabIndex={-1}  // ⬅️ يمنع focus بالكامل
+                >
+
+                {/* HEADER */}
                 <Box
                   sx={{
-                    position: "absolute",
-                    top: -40,
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: "130%",
-                    height: 120,
-                    backgroundColor: pkg.headerBg,
-                    clipPath: "path('M0,70 C120,-10 380,20 500,100 L500,0 L0,0 Z')",
-                    zIndex: 1
-                  }}
-                />
-
-
-
-              {/* النص فوق المنحني */}
-              <Box sx={{ position: "relative", zIndex: 2, textAlign: "center" }}>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontWeight: 700,
-                    color: pkg.highlight ? "white" : "#333"
+                    position: "relative",
+                    backgroundColor: isActive ? activeColor : headerDefault,
+                    padding: "22px 22px 48px 22px",
+                    transition: "0.3s"
                   }}
                 >
-                  {pkg.name}
-                </Typography>
-
-                <Box sx={{ mt: 1 }}>
                   <Typography
-                    variant="h4"
-                    component="span"
                     sx={{
-                      fontWeight: 700,
-                      color: pkg.highlight ? "white" : "#333"
+                      fontSize: "26px",
+                      fontWeight: 600,
+                      color: isActive ? "#fff" : "#333"
                     }}
                   >
-                    {pkg.price}
+                    {pkg.name}
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    component="span"
-                    sx={{
-                      ml: 1,
-                      color: pkg.highlight ? "rgba(255,255,255,0.9)" : "#666"
+
+                  <Box sx={{ display: "flex", alignItems: "baseline", gap: 1 }}>
+                    <Typography
+                      sx={{
+                        fontSize: "40px",
+                        fontWeight: 700,
+                        color: isActive ? "#fff" : "#333"
+                      }}
+                    >
+                      {pkg.price}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        color: isActive ? "#ffeaea" : "#666"
+                      }}
+                    >
+                      {pkg.period}
+                    </Typography>
+                  </Box>
+
+                  {/* --- SAME CURVE ALWAYS ---*/}
+                  <svg
+                    style={{
+                      position: "absolute",
+                      bottom: "-1px",
+                      left: 0,
+                      width: "100%",
+                      height: "55px"
                     }}
+                    viewBox="0 0 400 60"
+                    preserveAspectRatio="none"
                   >
-                    {pkg.period}
-                  </Typography>
-                </Box>
-              </Box>
-                </Box>
+                    <path 
+                      d="M0,0 
+                         C60,60 180,60 260,30 
+                         C320,10 355,0 400,0 
+                         L400,60 L0,60 Z"
+                      fill="white" 
+                    />
 
 
-              {/* ====== BODY ====== */}
-              <CardContent sx={{ textAlign: "center", mt: 2 }}>
-                <List sx={{ mb: 3 }}>
-                  {pkg.features.map((feature, idx) => (
-                    <ListItem key={idx} sx={{ px: 0, py: 0.5 }}>
-                      <ListItemIcon sx={{ minWidth: 28 }}>
-                        <CheckCircleOutlineIcon
-                          sx={{
-                            fontSize: "1rem",
-                            color: pkg.highlight ? "#ef9a9a" : "#ef5350"
-                          }}
-                        />
-                      </ListItemIcon>
-                      <ListItemText
-                        primary={feature}
-                        primaryTypographyProps={{
-                          fontSize: "0.9rem",
-                          color: "#666"
+
+                  </svg>
+                </Box>
+
+                {/* BODY */}
+                <CardContent sx={{ padding: "18px 22px 22px 22px" }}>
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+                    {pkg.features.map((feature, idx) => (
+                      <Box
+                        key={idx}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 1.5
                         }}
-                      />
-                    </ListItem>
-                  ))}
-                </List>
+                      >
+                        <Box
+                          sx={{
+                            width: 22,
+                            height: 22,
+                            borderRadius: "50%",
+                            border: `2px solid ${
+                              isActive ? "#ef5350" : borderDefault
+                            }`,
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center"
+                          }}
+                        >
+                          <Check
+                            sx={{
+                              fontSize: "14px",
+                              color: isActive ? "#ef5350" : borderDefault
+                            }}
+                          />
+                        </Box>
 
-                <Button
-                  variant="contained"
-                  fullWidth
-                  sx={{
-                    backgroundColor: pkg.highlight ? "#ef5350" : "#fff",
-                    color: pkg.highlight ? "#fff" : "#ef5350",
-                    borderRadius: "8px",
-                    py: 1.3,
-                    textTransform: "none",
-                    fontWeight: 600,
-                    border: pkg.highlight ? "none" : "1px solid #ef5350",
-                    "&:hover": {
-                      backgroundColor: pkg.highlight
-                        ? "#d32f2f"
-                        : "rgba(239,83,80,0.1)"
-                    }
-                  }}
-                >
-                  Select Plan
-                </Button>
-              </CardContent>
-            </Card>
-          ))}
+                        <Typography
+                          sx={{
+                            fontSize: "15px",
+                            color: "#555" ,
+                            fontWeight: 500
+                          }}
+                        >
+                          {feature}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
+
+                  <Button
+                    fullWidth
+                    sx={{
+                      backgroundColor: isActive ? "#ef5350": headerDefault,
+                      borderRadius: "12px",
+                      fontSize: "16px",
+                      mt: 3,
+                      padding: "10px",
+                      fontWeight: 600,
+                      color:  '#000',
+                      textTransform: "none",
+                      transition: "0.3s"
+                    }}
+                  >
+                    Select Plan
+                  </Button>
+                </CardContent>
+              </Card>
+            );
+          })}
         </Box>
       </Container>
     </Box>

@@ -14,16 +14,14 @@ export default function Footer() {
       sx={{ 
         backgroundColor: '#2d2d2d',
         color: 'white',
-        pt: 6,
-        pb: 0,
         width: "100%",
-        mx: 0,
-        px: 0
+        margin: 0,
+        padding: 0
       }}
     >
 
       {/* MAIN CONTENT */}
-      <Container maxWidth={false} disableGutters sx={{ mx: 0, px: 0 }}>
+      <Box sx={{ pt: 6, pb: 4 }}>
 
         {/* MAIN FLEX ROW */}
         <Box 
@@ -32,7 +30,7 @@ export default function Footer() {
             flexWrap: 'wrap',
             gap: 4,
             mb: 4,
-            px: 5
+            px: { xs: 3, md: 8 }
           }}
         >
 
@@ -155,19 +153,20 @@ export default function Footer() {
 
         </Box>
 
-      </Container>
+      </Box>
 
       {/* FOOTER BOTTOM — خارج الكونتينر */}
       <Box
         sx={{
-          py: -2,
-          px: 6,
+          py: 2,
+          px: { xs: 3, md: 8 },
           backgroundColor: '#111',
           borderTop: '1px solid #333',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          mt: 4,
+          flexWrap: 'wrap',
+          gap: 2
         }}
       >
         <Typography variant="body2" sx={{ color: '#aaa', fontSize: '0.95rem', fontWeight: 500 }}>

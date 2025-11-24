@@ -1,16 +1,17 @@
 import { Box } from "@mui/material";
-import PricingCard from "./TrustedRestaurants"
-import TrustedRestaurants from "./TrustedRestaurants";
+import Navbar from "./Navbar";
+import Hero from "./Hero";
+import WhyTermbi from "./WhyTermbi";
 import PricingPackages from "./PricingPacakages";
 import Features from "./Features";
 import Footer from "./Footer";
 
-
 export default function LandingPage() {
   return (
     <Box>
-      <
-      <TrustedRestaurants />
+      <Navbar />
+      <Hero />
+      <WhyTermbi />
       <PricingPackages />
       <Features />
       <Footer />
