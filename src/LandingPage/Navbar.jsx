@@ -1,6 +1,7 @@
 import { AppBar, Toolbar, Typography, Box, Button, Menu, MenuItem } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from "react";
+import { Link } from "react-router-dom"; 
 
 const countries = [
   { name: "USA", flag: "https://flagcdn.com/us.svg" },
@@ -63,7 +64,7 @@ export default function Navbar() {
         {/* Navigation + Dropdown + Login */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 8 }}>
 
-          <Typography component="a" href="#home" sx={{ color: 'white', textDecoration: 'none', fontSize: '0.95rem', '&:hover': { color: '#ef5350' } }}>
+          <Typography component={Link} to="/home" sx={{ color: 'white', textDecoration: 'none', fontSize: '0.95rem', '&:hover': { color: '#ef5350' } }}>
             Home
           </Typography>
 
@@ -136,25 +137,28 @@ export default function Navbar() {
 
           {/* Login Button */}
           <Button
-            variant="outlined"
-            sx={{
-              color: 'white',
-              borderColor: 'white',
-              textTransform: 'none',
-              fontSize: '0.80rem',     // تصغير الخط مثل الصورة
-              px: 3,                 // عرض أصغر
-              py: 0.5, 
-              minWidth: '70px',        // يجعل الزر بنفس الطول الظاهر
-              borderRadius: '10px',     // نفس الحواف الموجودة بالصورة
-              borderWidth: 'px',      // حد رفيع مثل الصورة
-              '&:hover': {
-                borderColor: '#ef5350',
-                backgroundColor: 'rgba(239, 83, 80, 0.1)',
-              }
-            }}
-          >
-            Log in
-          </Button>
+          component={Link}
+          to="/login"
+          variant="outlined"
+          sx={{
+            color: 'white',
+            borderColor: 'white',
+            textTransform: 'none',
+            fontSize: '0.80rem',
+            px: 3,
+            py: 0.5,
+            minWidth: '70px',
+            borderRadius: '10px',
+            borderWidth: '1px',
+            '&:hover': {
+              borderColor: '#ef5350',
+              backgroundColor: 'rgba(239, 83, 80, 0.1)',
+            }
+          }}
+        >
+          Log In
+        </Button>
+
 
 
         </Box>

@@ -21,16 +21,17 @@ export default function Footer() {
     >
 
       {/* MAIN CONTENT */}
-      <Box sx={{ pt: 6, pb: 4 }}>
+      <Box sx={{ pt: 0.9, pb: 0.5 }}>
+
 
         {/* MAIN FLEX ROW */}
         <Box 
           sx={{
             display: 'flex',
             flexWrap: 'wrap',
-            gap: 4,
-            mb: 4,
-            px: { xs: 3, md: 8 }
+            gap: 2,
+            mb: 2,
+            px: { xs: 2, md: 6 }
           }}
         >
 
@@ -59,7 +60,8 @@ export default function Footer() {
           <Box
             sx={{
               flex: { xs: '1 1 100%', md: '1 1 20%' },
-              fontFamily: 'SF Pro Display'
+              fontFamily: 'SF Pro Display',
+              mt: 3 
             }}
           >
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: '1rem' }}>
@@ -85,7 +87,7 @@ export default function Footer() {
           </Box>
 
           {/* QUICK LINKS */}
-          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 20%' } }}>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 20%' } , mt: 3    }}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: '1rem' }}>
               Quick Link
             </Typography>
@@ -109,7 +111,7 @@ export default function Footer() {
           </Box>
 
           {/* NEWSLETTER */}
-          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 30%' } }}>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 30%' },mt: 3     }}>
             <Typography variant="h6" sx={{ fontWeight: 600, mb: 2, fontSize: '1rem' }}>
               Newsletters
             </Typography>
@@ -158,8 +160,8 @@ export default function Footer() {
       {/* FOOTER BOTTOM — خارج الكونتينر */}
       <Box
         sx={{
-          py: 2,
-          px: { xs: 3, md: 8 },
+          py: 0.2,
+          px: { xs: 3, md: 6 },
           backgroundColor: '#111',
           borderTop: '1px solid #333',
           display: 'flex',
