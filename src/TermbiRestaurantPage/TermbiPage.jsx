@@ -1,18 +1,34 @@
-import { Box } from '@mui/material';
-import HomeNavbar from './components/TermbiNavbar';
-import HomeHero from './components/TermbiHero';
-import AboutUs from './components/AboutUs';
-import MenuSection from './components/MenuSection';
-import HomeFooter from './components/TermbiFooter';
+import { Route } from "react-router-dom";
 
-export default function Termbi() {
+
+// Layout
+import TermbiLayout from "./Layout/TermbiLayout";
+
+// Cart Pages
+import CartPage from "./Pages/CartPages/CartPage/CartPage";
+import CheckoutPage from "./Pages/CartPages/CheckoutPage/CheckoutPage";
+import PlaceOrderPage from "./Pages/CartPages/PlaceOrderPage/PlaceOrderPage";
+import ConfirmOrderPage from "./Pages/CartPages/ConfirmOrderPage/ConfirmOrderPage";
+import TermbiHome from "./Pages/TermbiHome/TermbiHome";
+// Reserve Page
+ import ReservePage from "./Pages/ReservePage/ReservePage";
+
+export function TermbiRoutes() {
   return (
-    <Box sx={{ backgroundColor: '#f8f8f8', minHeight: '100vh' }}>
-      <HomeNavbar />
-      <HomeHero />
-      <AboutUs />
-      <MenuSection />
-      <HomeFooter />
-    </Box>
+    <Route path="/Termbi" element={<TermbiLayout />}>
+  
+  {/* صفحة الهوم */}
+  <Route index element={<TermbiHome />} />
+
+  {/* صفحات السلة */}
+  <Route path="cart" element={<CartPage />} />
+  <Route path="checkout" element={<CheckoutPage />} />
+  <Route path="place-order" element={<PlaceOrderPage />} />
+  <Route path="confirm-order" element={<ConfirmOrderPage />} />
+  {/* صفحة الحجز */}
+  <Route path="reserve" element={<ReservePage />} />
+
+</Route>
+
   );
 }

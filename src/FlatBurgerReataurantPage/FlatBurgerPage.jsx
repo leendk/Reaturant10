@@ -1,18 +1,32 @@
-import { Box } from '@mui/material';
-import FlatBurgerNavbar from './components/FlatBurgerNavbar';
-import FlatBurgerHero from './components/FlatBurgerHero';
-import AboutUs from './components/AboutUs';
-import MenuSection from './components/MenuSection';
-import FlatBurgerFooter from './components/FlatBurgerFooter';
+import { Route } from "react-router-dom";
 
-export default function Termbi() {
+
+// Layout
+import FlatBurgerLayout from "./Layout/FlatBurgerLayout";
+
+// Cart Pages
+import CartPage from "./Pages/CartPages/CartPage/CartPage";
+import CheckoutPage from "./Pages/CartPages/CheckoutPage/CheckoutPage";
+import PlaceOrderPage from "./Pages/CartPages/PlaceOrderPage/PlaceOrderPage";
+import ConfirmOrderPage from "./Pages/CartPages/ConfirmOrderPage/ConfirmOrderPage";
+import FlatBurgerHome from "./Pages/FlatBurgerHome/FlatBurgerHome";
+import ReservePage from "./Pages/ReservePage/ReservePage";
+export function FlatBurgerRoutes() {
   return (
-    <Box sx={{ backgroundColor: '#f8f8f8', minHeight: '100vh' }}>
-      <FlatBurgerNavbar />
-      <FlatBurgerHero />
-      <AboutUs />
-      <MenuSection />
-      <FlatBurgerFooter />
-    </Box>
+    <Route path="/FlatBurger" element={<FlatBurgerLayout />}>
+  
+  {/* صفحة الهوم */}
+  <Route index element={<FlatBurgerHome />} />
+
+  {/* صفحات السلة */}
+  <Route path="cart" element={<CartPage />} />
+  <Route path="checkout" element={<CheckoutPage />} />
+  <Route path="place-order" element={<PlaceOrderPage />} />
+  <Route path="confirm-order" element={<ConfirmOrderPage />} />
+  {/* صفحة الحجز */}
+  <Route path="reserve" element={<ReservePage />} />
+
+</Route>
+
   );
 }

@@ -3,7 +3,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
-export default function HomeFooter() {
+export default function FlatBurgerFooter() {
   const footerLinks = {
     features: ['Get Website', 'Reservation', 'Ordering', 'Marketing'],
     quickLinks: ['Reserve a table','Home', 'Services', 'About us', 'Contact us']
@@ -12,7 +12,7 @@ export default function HomeFooter() {
   return (
     <Box 
       sx={{ 
-        backgroundColor: '#2d2d2d',
+        backgroundColor: '#000000',
         color: 'white',
         width: "100%",
         margin: 0,
@@ -51,12 +51,13 @@ export default function HomeFooter() {
           {/* Logo */}
           <Box
             component="img"
-            src="/logo.svg"
-            alt="term-bi logo"
+            src="/FlatBurgerLogo.svg"
+            alt="FlatBurgerLogo"
             sx={{
-              width: "150px",
+              width: "180px",
               height: "auto",
-              mb: 3.6,        // ← زيادة المسافة بين الشعار و "Keep in touch"
+              mb: 1,  
+              ml: -3       // ← زيادة المسافة بين الشعار و "Keep in touch"
             }}
           />
 
@@ -74,7 +75,7 @@ export default function HomeFooter() {
           </Typography>
 
           {/* Icons — مسافة صغيرة فوق الأيقونات */}
-          <Box sx={{ display: "flex", gap: 2, mt: 0.25, mb: 3}}>
+          <Box sx={{ display: "flex", gap: 2, mt: 0.25, mb: 1}}>
             <FacebookIcon sx={{ color: "#ddd", fontSize: "20px" }} />
             <InstagramIcon sx={{ color: "#ddd", fontSize: "20px" }} />
             <TwitterIcon sx={{ color: "#ddd", fontSize: "20px" }} />
@@ -89,7 +90,7 @@ export default function HomeFooter() {
               {/* image for 'tembi' word */}
               <Box
                 component="img"
-                src="/logo.svg"   
+                src="/Group1.svg"   
                 alt="termbi"
                 sx={{ width: "60px", height: "auto", display: "inline-block" }}
               />
@@ -163,7 +164,7 @@ export default function HomeFooter() {
                   fontFamily: 'SF Pro Display',
                   mb: 2,
                   fontSize: '0.92rem',
-                  '&:hover': { color: '#ef5350' }
+                  '&:hover': { color: '#c56e11ff' }
                 }}
               >
                 {link}
@@ -201,13 +202,13 @@ export default function HomeFooter() {
               variant="contained"
               fullWidth
               sx={{
-                backgroundColor: '#EC2323',
+                backgroundColor: '#EB7A00',
                 color: 'white',
                 width: '200px',
                 textTransform: 'none',
                 fontWeight: 600,
                 py: 1,
-                '&:hover': { backgroundColor: '#d32f2f' }
+                '&:hover': { backgroundColor: '#c56e11ff' }
               }}
             >
               Subscribe

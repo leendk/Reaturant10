@@ -1,7 +1,10 @@
 import { Box, Typography, Button, Rating } from '@mui/material';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useNavigate } from "react-router-dom";
 
-export default function HomeHero() {
+
+export default function FlatBurgerHero() {
+  const navigate = useNavigate();
   return (
    <Box
       sx={{
@@ -27,19 +30,21 @@ export default function HomeHero() {
         }}
       >
         {/* العنوان الرئيسي */}
-        <Typography
-          sx={{
-            fontWeight: '800',
-            color: '#333',
-            mb: 4,
-            fontSize: { xs: '32px', md: '40px' }, // ← حجم أكبر
-            lineHeight: 1.25,
-            whiteSpace: "nowrap" 
-          }}
-        >
-          Best <span style={{ color: '#E53935' }}>Food</span>, Best{" "}
-          <span style={{ color: '#E53935' }}>Services!</span>
-        </Typography>
+     <Typography
+  sx={{
+    fontWeight: '800',
+    color: '#333',
+    mb: 4,
+    fontSize: { xs: '32px', md: '40px' },
+    lineHeight: 1.25,
+    whiteSpace: "nowrap"   
+
+  }}
+>
+  Best <span style={{ color: '#EB7A00' }}>Food</span>, Best <span style={{ color: '#EB7A00' }}>Services!</span>
+</Typography>
+
+
 
         {/* الوصف */}
         <Typography
@@ -57,7 +62,7 @@ export default function HomeHero() {
 
         {/* الموقع */}
         <Box sx={{ display: 'flex', alignItems: 'center', gap: '8px', mb: 2 }}>
-        <LocationOnIcon sx={{ color: '#E53935', fontSize: '26px' }} /> 
+        <LocationOnIcon sx={{ color: '#EB7A00', fontSize: '26px' }} /> 
 
         <Typography
           component="a"
@@ -100,25 +105,27 @@ export default function HomeHero() {
 
         {/* الزر */}
        <Button
-        variant="contained"
-        sx={{
-          backgroundColor: '#E62424',    
-          color: '#fff',
-          borderRadius: '10px', 
-          width: '290px',           
-          padding: '10px 0',       
-          textTransform: 'none',
-          fontSize: '16px',              
-          fontWeight: '600',
-          boxShadow: '0px 2px 4px rgba(0,0,0,0.15)', 
-          '&:hover': {
-            backgroundColor: '#C91F1F',
-            boxShadow: '0px 2px 4px rgba(0,0,0,0.15)',
-          },
-        }}
-      >
-        Reserve a table
-      </Button>
+  variant="contained"
+  sx={{
+    backgroundColor: '#EB7A00',
+    color: '#fff',
+    borderRadius: '10px',
+    width: '290px',
+    padding: '10px 0',
+    textTransform: 'none',
+    fontSize: '16px',
+    fontWeight: '600',
+    boxShadow: '0px 2px 4px rgba(0,0,0,0.15)',
+    '&:hover': {
+      backgroundColor: '#d16c00ff',
+      boxShadow: '0px 2px 4px rgba(0,0,0,0.15)',
+    },
+  }}
+  onClick={() => navigate("/FlatBurger/reserve")}
+>
+  Reserve a table
+</Button>
+
 
       </Box>
 
@@ -138,8 +145,11 @@ export default function HomeHero() {
         sx={{
           width: { xs: 300, md: 520 },
           height: { xs: 300, md: 520 },
-          clipPath: 'circle(65% at 65% 50%)',
+          backgroundImage: 'url("assets/Component 2.png")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
           overflow: 'hidden',
+          clipPath: 'circle(65% at 65% 50%)',
           animation: `zoomShake 1.8s ease-out`,
           '@keyframes zoomShake': {
             '0%': { transform: 'scale(0.25)', opacity: 0 },
@@ -149,26 +159,7 @@ export default function HomeHero() {
             '100%': { transform: 'scale(1) rotate(0deg)' },
           },
         }}
-      >
-        <Box
-          component="img"
-          src="/Rectangle 7519.svg"
-          alt="Termbi special dishes"
-          sx={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            transform: 'scaleX(-1)', // يعكس الصورة لتظهر من الجهة المعاكسة
-          }}
-        />
-      </Box>
-
-
-
-
-
-
-
+      />
       </Box>
     </Box>
   );

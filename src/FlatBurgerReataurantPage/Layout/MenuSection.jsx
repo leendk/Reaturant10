@@ -1,55 +1,56 @@
 import { useState, useMemo } from 'react';
-import { Box, Typography, Button, Tabs, Tab, IconButton } from '@mui/material';
+import { Box, Typography, Button, Tabs, Tab, Snackbar, Alert,IconButton } from '@mui/material';
 import GridViewIcon from '@mui/icons-material/GridView';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import DownloadIcon from '@mui/icons-material/Download';
-import MenuItemPopup from './Popup';
+import MenuItemPopup from "./Popup.jsx";   // ✅ استيراد صحيح
+import { useCart } from "../../context/CartContext";
 
 const menuCategories = ['Popular', 'Salad', 'Pasta', 'Sandwiches', 'Sandwiches', 'Pizza', 'Burger', 'Juice'];
 
 const menuItems = [
   {
     id: 1,
-    name: 'Shrimp Pasta',
+    name: 'Pepperoni Pizza',
     description: 'The Shrimp Version Of Arugula Russo Dish, Clams Mixed With Pasta, Tomatoes And Garlic.',
     price: 50,
-    image: 'assets/Restauratnt/Rectangle 7315.png',
+    image: 'assets/FlatBurgerRestauratnt/200KB-Hot-Honey-Pepperoni-Pizza-12.jpg',
   },
   {
     id: 2,
-    name: 'Pasta Primavera',
+    name: 'Shawarma',
     description: 'The Shrimp Version Of Arugula Russo Dish, Clams Mixed With Pasta, Tomatoes And Garlic.',
     price: 70,
-    image: 'assets/Restauratnt/Rectangle 7315 (1).png',
+    image: 'assets/FlatBurgerRestauratnt/348s.jpg',
   },
   {
     id: 3,
-    name: 'Summer Pasta Salad',
+    name: 'Cheeseburger',
     description: 'The Shrimp Version Of Arugula Russo Dish, Clams Mixed With Pasta, Tomatoes And Garlic.',
     price: 36,
-    image: 'assets/Restauratnt/Rectangle 7315 (2).png',
+    image: 'assets/FlatBurgerRestauratnt/burger_0__FocusFillWyIwLjAwIiwiMC4wMCIsODAwLDQ3OF0_CompressedW10.jpg',
   },
   {
     id: 4,
-    name: 'Creamy Chicken Alfredo',
+    name: 'Falafel',
     description: 'The Shrimp Version Of Arugula Russo Dish, Clams Mixed With Pasta, Tomatoes And Garlic.',
     price: 45,
-    image: 'assets/Restauratnt/Rectangle 7315 (3).png',
+    image: 'assets/FlatBurgerRestauratnt/Falafel-Pita-FEATURED.jpg',
   },
   {
     id: 5,
-    name: 'Pasta-Rezepte',
+    name: 'Beef Burger',
     description: 'The Shrimp Version Of Arugula Russo Dish, Clams Mixed With Pasta, Tomatoes And Garlic.',
     price: 85,
-    image: 'assets/Restauratnt/Rectangle 7315 (4).png',
+    image: 'assets/FlatBurgerRestauratnt/ItalianBurger.jpg',
   },
   {
     id: 6,
-    name: 'Creamy Tomato',
+    name: 'Pizza Margherita',
     description: 'The Shrimp Version Of Arugula Russo Dish, Clams Mixed With Pasta, Tomatoes And Garlic.',
     price: 60,
-    image: 'assets/Restauratnt/Rectangle 7315 (5).png',
+    image: 'assets/FlatBurgerRestauratnt/PIZZA-MARGHERITA.jpg',
   },
   {
     id: 7,
@@ -85,6 +86,10 @@ export default function MenuSection() {
   const [activeTab, setActiveTab] = useState(0);
   const [viewMode, setViewMode] = useState('cards');
   const [sortBy, setSortBy] = useState(null);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [addedItemName, setAddedItemName] = useState('');
+
+  const { addToCart } = useCart();
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [popupOpen, setPopupOpen] = useState(false);
@@ -96,6 +101,13 @@ export default function MenuSection() {
 
   const closePopup = () => {
     setPopupOpen(false);
+  };
+
+  const handleAddToCart = (e, item) => {
+    e.stopPropagation();
+    addToCart(item);
+    setAddedItemName(item.name);
+    setSnackbarOpen(true);
   };
 
   const sortedItems = useMemo(() => {
@@ -123,7 +135,7 @@ export default function MenuSection() {
             fontSize: '35px',
           }}
         >
-          Our <span style={{ color: '#E53935' }}>Menu</span>
+          Our <span style={{ color: '#EB7A00' }}>Menu</span>
         </Typography>
 
         <Typography
@@ -139,116 +151,151 @@ export default function MenuSection() {
 
         {/* ===== TABS ===== */}
         <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
-          </Box>
-         {/* ===== SORT & VIEW BUTTONS ===== */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: 3,
-            mb: 4,
-            flexWrap: "wrap",
-          }}
-        >
-          {/* View as Cards */}
-          <Button
-            variant={viewMode === "cards" ? "contained" : "outlined"}
-            startIcon={<GridViewIcon />}
-            onClick={() => setViewMode("cards")}
+          <Tabs
+            value={activeTab}
+            onChange={(e, newValue) => setActiveTab(newValue)}
+            variant="scrollable"
+            scrollButtons="auto"
             sx={{
-              borderRadius: "8px",
-              textTransform: "none",
-              fontSize: "13px",
-              padding: "6px 22px",
-              minWidth: "150px",
-              borderColor: "#E53935",
-              color: viewMode === "cards" ? "#fff" : "#E53935",
-              backgroundColor: viewMode === "cards" ? "#E53935" : "transparent",
+              display: 'flex',
+              justifyContent: 'center',
+              '& .MuiTabs-flexContainer': {
+                justifyContent: 'center',
+              },
+              '& .MuiTab-root': {
+                textTransform: 'none',
+                fontSize: '15px',
+                color: '#666',
+                minWidth: 'auto',
+                padding: '12px 20px',
+              },
+              '& .Mui-selected': {
+                color: '#EB7A00 !important',
+                fontWeight: '600',
+              },
+              '& .MuiTabs-indicator': {
+                backgroundColor:' #EB7A00',
+              },
             }}
           >
-            View as Cards
-          </Button>
+            {menuCategories.map((category, index) => (
+              <Tab key={index} label={category} />
+            ))}
+          </Tabs>
 
-          {/* View as List */}
-          <Button
-            variant={viewMode === "list" ? "contained" : "outlined"}
-            startIcon={<ViewListIcon />}
-            onClick={() => setViewMode("list")}
-            sx={{
-              borderRadius: "8px",
-              textTransform: "none",
-              fontSize: "13px",
-              padding: "6px 22px",
-              minWidth: "150px",
-              borderColor: "#E53935",
-              color: viewMode === "list" ? "#fff" : "#333",
-              backgroundColor: viewMode === "list" ? "#E53935" : "transparent",
-            }}
-          >
-            View as List
-          </Button>
-
-          {/* Divider */}
-          <Box sx={{ width: "1px", height: "30px", background: "#ccc" }} />
-
-          {/* Sort by Name */}
-          <Button
-            variant={sortBy === "name" ? "contained" : "outlined"}
-            onClick={() => setSortBy(sortBy === "name" ? null : "name")}
-            sx={{
-              borderRadius: "8px",
-              textTransform: "none",
-              fontSize: "13px",
-              padding: "6px 22px",
-              minWidth: "150px",
-              borderColor: "#E53935",
-              color: sortBy === "name" ? "#fff" : "#333",
-              backgroundColor: sortBy === "name" ? "#E53935" : "transparent",
-            }}
-          >
-            Sort by Name
-          </Button>
-
-          {/* Sort by Price */}
-          <Button
-            variant={sortBy === "price" ? "contained" : "outlined"}
-            onClick={() => setSortBy(sortBy === "price" ? null : "price")}
-            sx={{
-              borderRadius: "8px",
-              textTransform: "none",
-              fontSize: "13px",
-              padding: "6px 22px",
-              minWidth: "150px",
-              borderColor: "#E53935",
-              color: sortBy === "price" ? "#fff" : "#333",
-              backgroundColor: sortBy === "price" ? "#E53935" : "transparent",
-            }}
-          >
-            Sort by Price
-          </Button>
-
-          {/* Divider */}
-          <Box sx={{ width: "1px", height: "30px", background: "#ccc" }} />
-
-          {/* Download Menu */}
-          <Button
-            variant="outlined"
-            startIcon={<DownloadIcon />}
-            sx={{
-              borderRadius: "8px",
-              textTransform: "none",
-              fontSize: "13px",
-              padding: "6px 22px",
-              minWidth: "150px",
-              borderColor: "#E53935",
-              color: "#333",
-            }}
-          >
-            Download Menu
-          </Button>
         </Box>
-      
+
+        {/* ===== SORT & VIEW BUTTONS ===== */}
+       {/* ===== SORT & VIEW BUTTONS ===== */}
+<Box
+  sx={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 3,
+    mb: 4,
+    flexWrap: "wrap",
+  }}
+>
+  {/* View as Cards */}
+  <Button
+    variant={viewMode === "cards" ? "contained" : "outlined"}
+    startIcon={<GridViewIcon />}
+    onClick={() => setViewMode("cards")}
+    sx={{
+      borderRadius: "8px",
+      textTransform: "none",
+      fontSize: "13px",
+      padding: "6px 22px",
+      minWidth: "150px",
+      borderColor: "#EC7A00",
+      color: viewMode === "cards" ? "#fff" : "#EC7A00",
+      backgroundColor: viewMode === "cards" ? "#EC7A00" : "transparent",
+    }}
+  >
+    View as Cards
+  </Button>
+
+  {/* View as List */}
+  <Button
+    variant={viewMode === "list" ? "contained" : "outlined"}
+    startIcon={<ViewListIcon />}
+    onClick={() => setViewMode("list")}
+    sx={{
+      borderRadius: "8px",
+      textTransform: "none",
+      fontSize: "13px",
+      padding: "6px 22px",
+      minWidth: "150px",
+      borderColor: "#EC7A00",
+      color: viewMode === "list" ? "#fff" : "#333",
+      backgroundColor: viewMode === "list" ? "#EC7A00" : "transparent",
+    }}
+  >
+    View as List
+  </Button>
+
+  {/* Divider */}
+  <Box sx={{ width: "1px", height: "30px", background: "#ccc" }} />
+
+  {/* Sort by Name */}
+  <Button
+    variant={sortBy === "name" ? "contained" : "outlined"}
+    onClick={() => setSortBy(sortBy === "name" ? null : "name")}
+    sx={{
+      borderRadius: "8px",
+      textTransform: "none",
+      fontSize: "13px",
+      padding: "6px 22px",
+      minWidth: "150px",
+      borderColor: "#EC7A00",
+      color: sortBy === "name" ? "#fff" : "#333",
+      backgroundColor: sortBy === "name" ? "#EC7A00" : "transparent",
+    }}
+  >
+    Sort by Name
+  </Button>
+
+  {/* Sort by Price */}
+  <Button
+    variant={sortBy === "price" ? "contained" : "outlined"}
+    onClick={() => setSortBy(sortBy === "price" ? null : "price")}
+    sx={{
+      borderRadius: "8px",
+      textTransform: "none",
+      fontSize: "13px",
+      padding: "6px 22px",
+      minWidth: "150px",
+      borderColor: "#EC7A00",
+      color: sortBy === "price" ? "#fff" : "#333",
+      backgroundColor: sortBy === "price" ? "#EC7A00" : "transparent",
+    }}
+  >
+    Sort by Price
+  </Button>
+
+  {/* Divider */}
+  <Box sx={{ width: "1px", height: "30px", background: "#ccc" }} />
+
+  {/* Download Menu */}
+  <Button
+    variant="outlined"
+    startIcon={<DownloadIcon />}
+    sx={{
+      borderRadius: "8px",
+      textTransform: "none",
+      fontSize: "13px",
+      padding: "6px 22px",
+      minWidth: "150px",
+      borderColor: "#EC7A00",
+      color: "#333",
+    }}
+  >
+    Download Menu
+  </Button>
+</Box>
+
+
         {/* ===== CARDS VIEW ===== */}
         {viewMode === 'cards' ? (
           <Box
@@ -342,20 +389,20 @@ export default function MenuSection() {
                       sx={{
                         fontSize: '15px',
                         fontWeight: '700',
-                        color: '#E53935',
+                        color: '#EB7A00',
                       }}
                     >
                       {item.price} $
                     </Typography>
-
                     <IconButton
+                    onClick={(e) => handleAddToCart(e, item)}
                       sx={{
-                        border: '1px solid #E53935',
-                        color: '#E53935',
+                        border: '1px solid #EB7A00',
+                        color: '#EB7A00',
                         width: '28px',
                         height: '28px',
                         '&:hover': {
-                          backgroundColor: '#E53935',
+                          backgroundColor: '#EB7A00',
                           color: '#fff',
                         },
                       }}
@@ -427,7 +474,7 @@ export default function MenuSection() {
                 </Box>
                 <Typography
                   sx={{
-                    color: '#E53935',
+                    color: '#EB7A00',
                     fontWeight: '700',
                     fontSize: '18px',
                     minWidth: '60px',
@@ -437,13 +484,14 @@ export default function MenuSection() {
                   {item.price} $
                 </Typography>
                 <IconButton
+                  onClick={(e) => handleAddToCart(e, item)}
                   size="small"
                   sx={{
-                    backgroundColor: '#E53935',
+                    backgroundColor: '#EB7A00',
                     color: '#fff',
                     padding: '8px',
                     '&:hover': {
-                      backgroundColor: '#C62828',
+                      backgroundColor: '#db8224ff',
                     },
                   }}
                 >
@@ -455,10 +503,23 @@ export default function MenuSection() {
         )}
       </Box>
 
-           {/* === POPUP HERE === */}
-      <MenuItemPopup open={popupOpen} onClose={closePopup} item={selectedItem} />
+      {/* === POPUP HERE === */}
+    <MenuItemPopup open={popupOpen} onClose={closePopup} item={selectedItem} />
+
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={2000}
+        onClose={() => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity="success"
+          sx={{ width: '100%' }}
+        >
+          {addedItemName} added to cart!
+        </Alert>
+      </Snackbar>
     </>
   );
 }
-
-

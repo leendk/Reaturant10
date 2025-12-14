@@ -1,0 +1,39 @@
+<svg width="181" height="181" viewBox="0 0 181 181" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient 1 (Background circle) -->
+    <linearGradient id="grad1" x1="0" y1="0" x2="181" y2="181" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFB74A"></stop>
+      <stop offset="100%" stop-color="#EB7A00"></stop>
+    </linearGradient>
+
+    <!-- Gradient 2 (Inner shadow ring) -->
+    <linearGradient id="grad2" x1="0" y1="0" x2="181" y2="181" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FF9F1A" stop-opacity="0.35"></stop>
+      <stop offset="100%" stop-color="#C76B00" stop-opacity="0.35"></stop>
+    </linearGradient>
+
+    <!-- Gradient 3 (Inner solid circle) -->
+    <linearGradient id="grad3" x1="30" y1="30" x2="150" y2="150">
+      <stop offset="0%" stop-color="#FF9F1A"></stop>
+      <stop offset="100%" stop-color="#EB7A00"></stop>
+    </linearGradient>
+  </defs>
+
+  <g clip-path="url(#clip0)">
+    <!-- OUTER CIRCLE -->
+    <circle cx="90.4" cy="90.4" r="90.4" fill="url(#grad1)"></circle>
+
+    <!-- INNER GLOW RING -->
+    <circle cx="90.4" cy="90.4" r="71.7" fill="url(#grad2)" opacity="0.3"></circle>
+
+    <!-- INNER CIRCLE -->
+    <circle cx="89.3" cy="89.3" r="49.9" fill="url(#grad3)"></circle>
+
+    <!-- CHECK ICON -->
+    <path d="M83.2431 107.929C82.8925 107.928 82.5453 107.859 82.221 107.726C81.8967 107.594 81.6016 107.399 81.353 107.153L64.203 90.0027C63.9544 89.7541 63.7594 89.4591 63.6262 89.1348C63.4929 88.8105 63.4232 88.4633 63.4229 88.1127C63.4227 87.7621 63.4922 87.4148 63.6253 87.0904C63.7585 86.7661 63.9533 86.471 64.2017 86.2223C64.4501 85.9735 64.7452 85.7783 65.0696 85.645C65.394 85.5117 65.7413 85.4417 66.0919 85.4412C66.4425 85.4407 66.7898 85.5098 67.1143 85.6427C67.4388 85.7756 67.7339 85.9701 67.9827 86.2183L83.2431 101.478L110.736 73.9847C110.985 73.7361 111.28 73.5412 111.605 73.4081C111.93 73.2751 112.278 73.2057 112.629 73.2059C112.98 73.2061 113.327 73.2759 113.652 73.4092C113.976 73.5424 114.271 73.7374 114.52 73.986C114.769 74.2347 114.964 74.5298 115.097 74.8542C115.23 75.1786 115.3 75.5258 115.299 75.8764C115.298 76.227 115.229 76.5743 115.096 76.8987C114.963 77.2231 114.769 77.5182 114.52 77.7669L85.1333 107.154C84.8842 107.402 84.5897 107.597 84.2654 107.729C83.9411 107.861 83.5937 107.931 83.2431 107.929Z" fill="#FFF9F9"></path>
+  </g>
+
+  <clipPath id="clip0">
+    <rect width="180.816" height="180.816" fill="white"></rect>
+  </clipPath>
+</svg>

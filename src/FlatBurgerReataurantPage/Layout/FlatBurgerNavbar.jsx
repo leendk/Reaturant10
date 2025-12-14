@@ -1,18 +1,10 @@
-import { 
-  Box, 
-  InputBase, 
-  IconButton, 
-  Badge, 
-  Menu,
-  MenuItem
-} from '@mui/material';
-
-import { Link } from 'react-router-dom';
-
+import { Box, InputBase, IconButton, Badge, Menu,MenuItem} from '@mui/material';
+import { Link, useNavigate } from 'react-router-dom';
 import SearchIcon from '@mui/icons-material/Search';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import { useCart } from "../../context/CartContext";
 
 import { useState } from "react";
 
@@ -26,6 +18,9 @@ export default function FlatBurgerNavbar() {
   // ------------------------ STATE ------------------------
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [anchorEl, setAnchorEl] = useState(null);
+   const navigate = useNavigate();
+  const { getCartCount } = useCart();
+
 
   // ------------------------ FUNCTIONS ------------------------
   const openMenu = (e) => {
@@ -60,7 +55,7 @@ export default function FlatBurgerNavbar() {
           <Box>
             <Box
               component="img"
-              src="public\FlatBurgerLogo.svg"
+              src="/FlatBurgerLogo.svg"
               alt="FlatBurgerLogo"
               sx={{ height: '50px', objectFit: 'contain' }}
             />
@@ -92,12 +87,17 @@ export default function FlatBurgerNavbar() {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: '22px' }}>
 
         {/* Cart */}
-        <Badge badgeContent={0} color="error">
-          <ShoppingCartOutlinedIcon 
-            sx={{ color: 'white', cursor: 'pointer', fontSize: 26 }}
-          />
-        </Badge>
+        <Badge 
+            badgeContent={getCartCount()} 
+            color="error"
+            sx={{ cursor: 'pointer' }}
+           onClick={() => navigate('/FlatBurger/cart')}
 
+            >
+            <ShoppingCartOutlinedIcon 
+                sx={{ color: 'white', cursor: 'pointer', fontSize: 26 }}
+            />
+        </Badge>
         {/* Country Dropdown */}
         <Box>
           <Box
